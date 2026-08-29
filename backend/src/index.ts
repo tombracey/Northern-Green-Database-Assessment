@@ -1,10 +1,11 @@
 import express from "express";
 import { pool } from "./db";
+import nearestRouter from "./nearest";
 
 const app = express();
 const port = 3001;
 
-app.get("/locations", async (_req: express.Request, res: express.Response) => {
+app.get("/locations", async (_req, res) => {
   try {
     const result = await pool.query("SELECT * FROM locations");
     res.json(result.rows);
@@ -13,6 +14,8 @@ app.get("/locations", async (_req: express.Request, res: express.Response) => {
     res.status(500).json({ error: "Database error" });
   }
 });
+
+app.use("/", nearestRouter);
 
 app.listen(port, () => {
   console.log(`Backend running on http://localhost:${port}`);
