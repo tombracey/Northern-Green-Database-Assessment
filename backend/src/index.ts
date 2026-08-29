@@ -1,9 +1,11 @@
 import express from "express";
 import { pool } from "./db";
 import nearestRouter from "./nearest";
+import cors from "cors";
 
 const app = express();
 const port = 3001;
+app.use(cors());
 
 app.get("/locations", async (_req, res) => {
   try {
