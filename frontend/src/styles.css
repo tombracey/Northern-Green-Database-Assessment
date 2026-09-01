@@ -79,3 +79,26 @@ button:active {
 ::placeholder {
     text-align: center;
 }
+
+/* Table */
+
+table {
+  margin: 20px auto;
+  border-collapse: collapse;
+  width: fit-content;
+  min-width: 300px;
+  border-radius: 10px;
+}
+
+table th,
+table td {
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  text-align: left;
+}
+
+table th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  color: var(--northern_green);
+}
