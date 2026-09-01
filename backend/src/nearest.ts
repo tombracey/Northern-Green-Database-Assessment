@@ -13,7 +13,7 @@ router.get("/nearest", async (req, res) => {
     const user = await geocode(userInput);
 
     const shops = await pool.query(
-      "SELECT name, latitude, longitude FROM locations"
+      "SELECT * FROM locations"
     );
 
     const nearest = shops.rows
@@ -29,7 +29,7 @@ router.get("/nearest", async (req, res) => {
         )
     }))
     .sort((a, b) => a.distanceKm - b.distanceKm)
-    .slice(0, 5);
+    .slice(0, 8);
     res.json(nearest);
   } catch (err: any) {
     console.error(err.message);
