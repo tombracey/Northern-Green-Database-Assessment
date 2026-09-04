@@ -8,13 +8,20 @@ const router = express.Router();
 router.get("/nearest", async (req, res) => {
   try {
     const rawQuery = req.query.query?.toString();
+    console.log("Query reached the backend: " + rawQuery)
     const userInput = `${rawQuery}, England`;
 
     const user = await geocode(userInput);
+    console.log("User input geocoded: " + user)
 
-    const shops = await pool.query(
-      "SELECT * FROM locations"
-    );
+    let shops;
+    try {
+      shops = await pool.query("SELECT * FROM locations");
+    } catch (err: any) {
+      console.log("Error querying DB:");
+      console.error(err.message);
+      return res.status(500).json({ error: "Database error" });
+    }
 
     const nearest = shops.rows
     .map((shop) => ({
