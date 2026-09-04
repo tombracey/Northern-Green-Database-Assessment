@@ -1,14 +1,16 @@
-# Database
+@echo off
+
+REM Database
 docker compose up -d
 
-# Backend
+REM Backend
 cd backend
-npm install
-npm run build
-npm start &
+call npm install
+call npm run build
+start "backend" cmd /c "npm start"
 cd ..
 
-# Frontend
+REM Frontend
 cd frontend
-npm install
-npm start
+call npm install
+call npm start
